@@ -42,7 +42,7 @@ class UnsupportedAlgorithmError(RoboMazeError):
 class MazeNotFoundError(RoboMazeError):
     """No existe un laberinto predefinido con el identificador dado."""
 
-    status_code = status.HTTP_404_NOT_FOUND
+    status_code = 404
 
 
 async def robomaze_exception_handler(

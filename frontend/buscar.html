@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscar ruta · RoboMaze</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="app-header"></header>
+
+  <main class="container page">
+    <div class="page-head">
+      <span class="eyebrow">POST /api/v1/search</span>
+      <h1>Buscar una ruta</h1>
+      <p>Dibuja el laberinto, define el inicio y la meta, elige un algoritmo y ejecútalo.
+        La búsqueda se calcula en el backend; aquí solo se visualiza el resultado.</p>
+    </div>
+
+    <div class="workbench">
+      <!-- Columna de controles -->
+      <div>
+        <div class="panel">
+          <p class="panel-title">Herramienta de edición</p>
+          <div class="tool-group" id="tool-group">
+            <button class="tool-btn active" data-tool="wall">
+              <span class="swatch sw-wall"></span>Muro
+            </button>
+            <button class="tool-btn" data-tool="start">
+              <span class="swatch sw-start"></span>Inicio
+            </button>
+            <button class="tool-btn" data-tool="goal">
+              <span class="swatch sw-goal"></span>Meta
+            </button>
+          </div>
+          <p class="muted mt-1">Haz clic o arrastra para pintar muros. Cambia de herramienta
+            para mover el inicio o la meta.</p>
+        </div>
+
+        <div class="panel">
+          <p class="panel-title">Algoritmo</p>
+          <div class="field">
+            <select id="algorithm">
+              <option value="bfs">BFS — Anchura (ruta más corta)</option>
+              <option value="dfs">DFS — Profundidad</option>
+              <option value="astar">A* — Heurística (opcional)</option>
+            </select>
+          </div>
+          <div class="checkbox-row mt-1">
+            <input type="checkbox" id="animate" checked />
+            <label for="animate" style="margin:0">Animar exploración</label>
+          </div>
+          <div class="field mt-1">
+            <label for="speed">Velocidad de animación</label>
+            <div class="range-row">
+              <span class="muted">Lenta</span>
+              <input type="range" id="speed" min="4" max="60" value="40" />
+              <span class="muted">Rápida</span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg mt-1" id="run-btn">Ejecutar búsqueda</button>
+        </div>
+
+        <div class="panel">
+          <p class="panel-title">Tamaño del laberinto</p>
+          <div class="field-row">
+            <div class="field" style="flex:1">
+              <label for="rows-input">Filas</label>
+              <input type="number" id="rows-input" min="2" max="40" value="10" />
+            </div>
+            <div class="field" style="flex:1">
+              <label for="cols-input">Columnas</label>
+              <input type="number" id="cols-input" min="2" max="40" value="10" />
+            </div>
+          </div>
+          <button class="btn btn-ghost btn-block" id="resize-btn">Crear laberinto vacío</button>
+          <div class="flex-wrap mt-1">
+            <button class="btn btn-ghost" id="clear-btn" style="flex:1">Limpiar muros</button>
+          </div>
+          <div class="flex-wrap mt-1">
+            <select id="preset-select" style="flex:1">
+              <option value="">Cargar predefinido…</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Escenario + resultados -->
+      <div>
+        <div class="stage">
+          <div id="maze" style="width:100%; margin:0 auto"></div>
+          <div class="legend">
+            <span><i class="lg-start"></i>Inicio</span>
+            <span><i class="lg-goal"></i>Meta</span>
+            <span><i class="lg-wall"></i>Muro</span>
+            <span><i class="lg-visited"></i>Explorado</span>
+            <span><i class="lg-path"></i>Ruta</span>
+          </div>
+        </div>
+
+        <div class="panel mt-2">
+          <p class="panel-title">Resultados</p>
+          <div id="result-banner"></div>
+          <div class="stats-grid" id="stats">
+            <div class="stat"><div class="stat-label">Algoritmo</div><div class="stat-value" id="st-algo">—</div></div>
+            <div class="stat"><div class="stat-label">Longitud de ruta</div><div class="stat-value" id="st-len">—</div></div>
+            <div class="stat"><div class="stat-label">Nodos explorados</div><div class="stat-value" id="st-nodes">—</div></div>
+            <div class="stat"><div class="stat-label">Tiempo de ejecución</div><div class="stat-value" id="st-time">—</div></div>
+          </div>
+          <p class="placeholder" id="result-placeholder">
+            Ejecuta una búsqueda para ver la ruta y las métricas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    RoboMaze · Frontend en HTML, CSS y JavaScript · Consume la API REST del backend (FastAPI)
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/maze-grid.js"></script>
+  <script src="js/buscar.js"></script>
+</body>
+</html>

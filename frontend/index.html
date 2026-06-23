@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoboMaze · Búsqueda de rutas en laberintos</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="app-header"></header>
+
+  <main>
+    <!-- Héroe -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="eyebrow" style="color: var(--azul-costanero-300)">Práctica 4 · Búsqueda en espacios de estados</span>
+          <h1>RoboMaze</h1>
+          <p>
+            Visualiza cómo un agente encuentra su camino dentro de un laberinto
+            usando los algoritmos <strong>BFS</strong> y <strong>DFS</strong>. Dibuja
+            obstáculos, define inicio y meta, ejecuta la búsqueda y observa la ruta,
+            los nodos explorados y el tiempo de cada algoritmo.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="buscar.html">Empezar a buscar</a>
+            <a class="btn btn-ghost btn-lg" href="laberintos.html">Ver laberintos</a>
+          </div>
+        </div>
+        <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- Tarjetas de navegación -->
+    <section class="container page">
+      <div class="page-head">
+        <span class="eyebrow">Explora el sistema</span>
+        <h1>¿Qué quieres hacer?</h1>
+        <p>El sitio está organizado por tareas. Cada sección consume un servicio
+          del backend y se enfoca en una acción concreta.</p>
+      </div>
+
+      <div class="feature-grid">
+        <a class="feature-card" href="laberintos.html">
+          <div class="feature-ic c2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3>Laberintos predefinidos</h3>
+          <p>Explora los 5 laberintos de prueba incluidos en el sistema y cárgalos
+            con un clic para buscar o comparar.</p>
+        </a>
+
+        <a class="feature-card" href="buscar.html">
+          <div class="feature-ic c1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <h3>Buscar una ruta</h3>
+          <p>Editor interactivo para dibujar el laberinto y ejecutar un algoritmo
+            (BFS, DFS o A*) con animación de la exploración.</p>
+        </a>
+
+        <a class="feature-card" href="comparar.html">
+          <div class="feature-ic c3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 8 2 11l3 3"/><path d="m19 8 3 3-3 3"/><path d="M2 11h7"/><path d="M15 11h7"/></svg>
+          </div>
+          <h3>Comparar algoritmos</h3>
+          <p>Ejecuta varios algoritmos sobre el mismo laberinto y observa lado a lado
+            cuál gana en ruta, nodos explorados y tiempo.</p>
+        </a>
+      </div>
+
+      <!-- Estado del backend -->
+      <div class="card card-pad mt-2" id="backend-info">
+        <div class="row-between">
+          <div>
+            <h2 class="card-title" style="margin-bottom:0.3rem">Estado del backend</h2>
+            <p class="muted" id="backend-detail">Comprobando conexión con el microservicio…</p>
+          </div>
+          <button class="btn btn-ghost" id="recheck-btn">Volver a comprobar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    RoboMaze · Frontend en HTML, CSS y JavaScript · Consume la API REST del backend (FastAPI)
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

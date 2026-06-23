@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparar algoritmos · RoboMaze</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header id="app-header"></header>
+
+  <main class="container page">
+    <div class="page-head">
+      <span class="eyebrow">POST /api/v1/search/compare</span>
+      <h1>Comparar algoritmos</h1>
+      <p>Ejecuta varios algoritmos sobre el mismo laberinto y observa lado a lado la ruta
+        de cada uno, junto a una tabla que resalta el ganador en cada métrica.</p>
+    </div>
+
+    <div class="workbench right">
+      <!-- Editor -->
+      <div>
+        <div class="stage">
+          <div id="maze" style="width:100%; margin:0 auto"></div>
+          <div class="legend">
+            <span><i class="lg-start"></i>Inicio</span>
+            <span><i class="lg-goal"></i>Meta</span>
+            <span><i class="lg-wall"></i>Muro</span>
+            <span><i class="lg-visited"></i>Explorado</span>
+            <span><i class="lg-path"></i>Ruta</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles -->
+      <div>
+        <div class="panel">
+          <p class="panel-title">Herramienta de edición</p>
+          <div class="tool-group" id="tool-group">
+            <button class="tool-btn active" data-tool="wall"><span class="swatch sw-wall"></span>Muro</button>
+            <button class="tool-btn" data-tool="start"><span class="swatch sw-start"></span>Inicio</button>
+            <button class="tool-btn" data-tool="goal"><span class="swatch sw-goal"></span>Meta</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <p class="panel-title">Algoritmos a comparar</p>
+          <div class="algo-options" id="algo-options">
+            <label class="algo-chip checked">
+              <input type="checkbox" value="bfs" checked />
+              <span><span class="algo-name">BFS</span><br><span class="algo-desc">Anchura · ruta más corta</span></span>
+            </label>
+            <label class="algo-chip checked">
+              <input type="checkbox" value="dfs" checked />
+              <span><span class="algo-name">DFS</span><br><span class="algo-desc">Profundidad</span></span>
+            </label>
+            <label class="algo-chip">
+              <input type="checkbox" value="astar" />
+              <span><span class="algo-name">A*</span><br><span class="algo-desc">Heurística (opcional)</span></span>
+            </label>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg mt-1" id="run-btn">Comparar</button>
+        </div>
+
+        <div class="panel">
+          <p class="panel-title">Laberinto</p>
+          <div class="field-row">
+            <div class="field" style="flex:1">
+              <label for="rows-input">Filas</label>
+              <input type="number" id="rows-input" min="2" max="40" value="10" />
+            </div>
+            <div class="field" style="flex:1">
+              <label for="cols-input">Columnas</label>
+              <input type="number" id="cols-input" min="2" max="40" value="10" />
+            </div>
+          </div>
+          <button class="btn btn-ghost btn-block" id="resize-btn">Crear vacío</button>
+          <div class="flex-wrap mt-1">
+            <button class="btn btn-ghost" id="clear-btn" style="flex:1">Limpiar muros</button>
+          </div>
+          <div class="flex-wrap mt-1">
+            <select id="preset-select" style="flex:1">
+              <option value="">Cargar predefinido…</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resultados de comparación -->
+    <section id="compare-results" class="mt-2 hidden">
+      <div class="page-head" style="margin-top:1.5rem">
+        <h1 style="font-size:1.3rem">Resultado de la comparación</h1>
+      </div>
+
+      <div class="card card-pad" style="margin-bottom:1.3rem">
+        <div class="table-wrap">
+          <table class="compare-table" id="summary-table"></table>
+        </div>
+      </div>
+
+      <div class="compare-boards" id="boards"></div>
+    </section>
+
+    <p class="placeholder" id="compare-placeholder">
+      Configura el laberinto, elige los algoritmos y pulsa «Comparar» para ver el análisis.
+    </p>
+  </main>
+
+  <footer class="app-footer">
+    RoboMaze · Frontend en HTML, CSS y JavaScript · Consume la API REST del backend (FastAPI)
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/maze-grid.js"></script>
+  <script src="js/comparar.js"></script>
+</body>
+</html>

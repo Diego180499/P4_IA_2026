@@ -1,0 +1,17 @@
+# Entornos virtuales (no deben entrar a la imagen; se reinstala con pip).
+.venv/
+venv/
+ENV/
+
+# Cachés de Python y pruebas.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Pruebas y metadatos no necesarios en runtime.
+tests/
+.git/
+.gitignore
+README.md

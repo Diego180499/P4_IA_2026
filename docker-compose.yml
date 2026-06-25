@@ -1,0 +1,43 @@
+# ===========================================================================
+# RoboMaze · Orquestación de backend (FastAPI) + frontend (Nginx)
+# ---------------------------------------------------------------------------
+# Levanta ambos servicios con un solo comando:
+#     docker compose up --build
+#
+# Acceso desde el navegador del host:
+#   - Frontend:  http://localhost:8080
+#   - API docs:  http://localhost:8001/docs
+#
+# NOTA IMPORTANTE sobre el puerto del backend:
+# El archivo frontend/js/config.js apunta a "http://localhost:8001". Ese código
+# se ejecuta en el NAVEGADOR del usuario, por lo que "localhost" es la máquina
+# del host (no la red interna de Docker). Por eso el backend se publica en el
+# puerto 8001 del host y así el frontend lo encuentra sin cambios.
+# ===========================================================================
+
+services:
+  backend:
+    build: ./backend
+    image: robomaze-backend
+    container_name: robomaze-backend
+    ports:
+      - "8001:8001"          # host:contenedor
+    networks:
+      - robomaze-net
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    image: robomaze-frontend
+    container_name: robomaze-frontend
+    ports:
+      - "8080:80"            # navega en http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - robomaze-net
+    restart: unless-stopped
+
+networks:
+  robomaze-net:
+    driver: bridge

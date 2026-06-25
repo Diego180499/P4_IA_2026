@@ -1,0 +1,6 @@
+# No incluir control de versiones ni documentación en la imagen.
+.git/
+.gitignore
+README.md
+Dockerfile
+.dockerignore
